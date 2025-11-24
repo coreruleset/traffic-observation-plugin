@@ -21,7 +21,7 @@ The plugin writes it's messages as JSON. Well almost as JSON. ModSec does not
 allow double quotes in the log messages, so we write single quotes and we need to translate that into
 double quotes before we can work on the data.
 
-The alias `meldata` is part of a larger collection of useful ModSecurity aliases hosted together with a lot of tutorials at [netnea.com)(https://netnea.com). This is also where you can find the `basicstats.awk` script.
+The alias `meldata` is part of a larger collection of useful ModSecurity aliases hosted together with a lot of tutorials at [netnea.com](https://netnea.com). This is also where you can find the `basicstats.awk` script.
 
 ```bash
 $ alias meldata='grep -o "\[data [^]]*" | cut -d\" -f2'
@@ -72,7 +72,7 @@ $ cat error.log | ./bin/create-traffic-report.sh -traffic-type mixed --contact "
 
 ### Overview of data points in the report
 
-Here is an example report: FIXME
+Here is an example report: [AGT-2025-11-24.json](https://github.com/coreruleset/traffic-observation-plugin/blob/main/traffic-reports/AGT-2025-11-24.json)
 
 The report covers the following data points:
 
