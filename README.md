@@ -3,13 +3,21 @@
 This is an offical CRS plugin that logs information about requests that is not normally logged.
 
 We are planning to do performance testing. But that depends on real world sample traffic. Now the problem is
-there is relatively little litterature on representative HTTP traffic.
+there is relatively little literature on representative HTTP traffic.
+
+How many HTTP headers are typically submitted in a request these days? How many parameters 
+do you have in a query string on average? What size does a normal request body have?
+
+If we have responses on these question, we can then create performance testing traffic that is actually resembling
+the real world traffic. So future performance optimization will actually result in improvements on normal traffic.
 
 More information about this idea and existing scholarly literature on the subject: https://github.com/coreruleset/coreruleset/wiki/Dev-Retreat-2025-Sample-Traffic
 
-This plugin writes down this information with the idea to bring up this information.
+Unfortunately, the literature is not comprehensive at all. We need to find out ourselves.
 
-As is, the plugin writes a single log message (non-blocking alert) per request.
+**So this plugin extracts this information and writes it into the `error.log`. And it also brings an analyzer script that extracts the information and writes a summary report that is free from sensitive information and thus sharable.**
+
+The plugin writes a single log message (non-blocking alert) per request.
 
 ## Installation
 
