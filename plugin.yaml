@@ -1,0 +1,53 @@
+schema_version: 1
+
+plugin:
+  name: "traffic-observation-plugin"
+  description: "Logs request and response traffic characteristics (header counts, content lengths, content types, etc.) to error.log for CRS traffic analysis."
+  long_description: >
+    Writes a single non-blocking alert per request containing metadata such as
+    protocol, method, filename length, query string length and argument count,
+    request/response header counts, cookie length and count, content types,
+    content lengths and status code. A companion analyzer script
+    (bin/create-traffic-report.sh) aggregates the logged data into a summary
+    report, free of sensitive information, that can be shared with the CRS
+    project to help characterize real-world HTTP traffic for performance
+    testing. Supports a sampling mode to log only a configurable percentage
+    of requests instead of every request.
+  type: "official"
+  category: "logging"
+  status: "untested"
+  license: "Apache-2.0"
+  authors:
+    - name: "OWASP CRS Team"
+      url: "https://coreruleset.org"
+  repository: "https://github.com/coreruleset/traffic-observation-plugin"
+  keywords:
+    - logging
+    - traffic-analysis
+    - performance-testing
+    - observability
+    - sampling
+
+rule_id_range:
+  start: 9526000
+  end: 9526999
+
+compatibility:
+  crs_version: ">=4.0.0"
+
+configuration:
+  file: "plugins/traffic-observation-config.conf"
+  variables:
+    - name: "tx.traffic-observation-plugin_enabled"
+      type: "boolean"
+      default: 1
+      description: >
+        Enables or disables the traffic-observation plugin. When set to 0,
+        all plugin rules (9526100-9526999) are removed.
+    - name: "tx.traffic-observation-sampling_percentage"
+      type: "string"
+      example: "0.1"
+      description: >
+        Percentage of requests to log, from 0.0 to 100 (one decimal digit
+        supported, e.g. 0.1 for one request in 1,000). Unset by default,
+        which logs every request; setting it to 0 disables logging entirely.
